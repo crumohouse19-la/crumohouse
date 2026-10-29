@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Crumo House — Menu</title>
+<meta name="description" content="Crumo House digital menu. Homemade, hygienic gourmet cookies in Mumbai. Order on WhatsApp.">
+<meta name="theme-color" content="#1C1411">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+</head>
+<body>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500;600;700&display=swap">
+<style>
+/* Layout concept: a phone-first "scan card" — splash reveal, then a scrolling menu board with sticky order bar. Single committed dark theme. */
+:root{--bg:#1C1411;--bg-2:#241A16;--card:#FBF4E6;--card-2:#F2E7D3;--ink:#2A1A14;--fg:#F6ECDC;--muted:#B9A48F;--gold:#D9B46A;--gold-2:#F0D28F;--wine:#7A1F31;--wa:#25D366;--ig:#E1306C;--zo:#E23744;--font-display:"Fredoka","Segoe UI",sans-serif;--font-serif:"Cormorant Garamond",Georgia,serif;--font-body:"Jost","Segoe UI",system-ui,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+[hidden]{display:none!important}
+h1,h2,h3{font-family:var(--font-display);font-weight:700;margin:0;line-height:1.05;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+strong{font-weight:700;color:var(--gold-2)}
+:focus-visible{outline:2px solid var(--gold-2);outline-offset:2px}
+.wrap{max-width:560px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.num{font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001s!important;transition-duration:.001s!important}}
+
+/* splash (opening animation) */
+.splash{position:fixed;inset:0;z-index:50;background:var(--bg);display:grid;place-items:center;overflow:hidden;animation:splashOut .7s cubic-bezier(.7,0,.3,1) 2.6s forwards}
+.splash .ring{position:absolute;width:140vmax;height:140vmax;border-radius:50%;background:radial-gradient(circle,rgba(217,180,106,.22),transparent 60%);animation:ringIn 2.2s ease-out both}
+.splash .emb{width:118px;height:138px;object-fit:cover;border-radius:999px;border:2px solid var(--gold);box-shadow:0 0 0 0 rgba(217,180,106,.35);animation:embIn 1.1s cubic-bezier(.2,.9,.2,1.2) both,glow 1.6s ease-in-out .9s infinite alternate}
+.splash .name{font-family:var(--font-serif);font-weight:600;font-size:2.4rem;letter-spacing:.08em;color:var(--fg);margin-top:1.1rem;overflow:hidden}
+.splash .name span{display:inline-block;animation:rise .8s cubic-bezier(.2,.9,.2,1) .45s both}
+.splash .tag{font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-top:.5rem;animation:fade .8s .9s both}
+.splash .crumbs i{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--gold-2);opacity:0;animation:crumb 1.6s ease-out both}
+.splash .crumbs i:nth-child(1){left:30%;top:40%;animation-delay:.6s}.splash .crumbs i:nth-child(2){left:66%;top:36%;animation-delay:.75s}.splash .crumbs i:nth-child(3){left:40%;top:62%;animation-delay:.9s}.splash .crumbs i:nth-child(4){left:62%;top:64%;animation-delay:1.05s}.splash .crumbs i:nth-child(5){left:50%;top:28%;animation-delay:1.2s}
+.splash .skip{position:absolute;bottom:calc(1.2rem + env(safe-area-inset-bottom,0px));font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);background:none;border:0;animation:fade .6s 1.4s both}
+.splash.done{display:none}
+@keyframes embIn{from{transform:scale(.3) rotate(-20deg);opacity:0}to{transform:none;opacity:1}}
+@keyframes glow{to{box-shadow:0 0 0 18px rgba(217,180,106,0)}}
+@keyframes ringIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes rise{from{transform:translateY(110%)}to{transform:none}}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes crumb{0%{opacity:0;transform:translateY(20px) scale(.5)}30%{opacity:1}100%{opacity:0;transform:translateY(-60px) scale(1.2)}}
+@keyframes splashOut{to{clip-path:circle(0 at 50% 42%);visibility:hidden}}
+@supports not (clip-path:circle(0 at 50% 50%)){@keyframes splashOut{to{opacity:0;visibility:hidden}}}
+.page{animation:pageIn .9s ease 2.7s both}
+@keyframes pageIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* header */
+.head{position:relative;overflow:hidden;padding-block:1.6rem 1.2rem;text-align:center}
+.head .bg{position:absolute;inset:0;z-index:-1}
+.head .bg img{width:100%;height:100%;object-fit:cover;object-position:50% 35%;filter:brightness(.45) saturate(1.05)}
+.head .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,20,17,.2),var(--bg))}
+.head .emb{width:84px;height:98px;object-fit:cover;border-radius:999px;border:2px solid var(--gold);box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.head h1{font-family:var(--font-serif);font-weight:600;font-size:2.2rem;letter-spacing:.06em;margin-top:.7rem}
+.head .tag{font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-top:.3rem}
+.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem;margin-top:.9rem}
+.badge{border:1px solid rgba(255,255,255,.25);background:rgba(28,20,17,.6);border-radius:999px;padding:.3rem .8rem;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;backdrop-filter:blur(6px)}
+.live{display:inline-flex;align-items:center;gap:.45rem;margin-top:.8rem;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.live i{width:7px;height:7px;border-radius:50%;background:#4ADE80;animation:pulse 1.8s infinite}
+.live.off i{background:#F59E0B;animation:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(74,222,128,.6)}100%{box-shadow:0 0 0 9px rgba(74,222,128,0)}}
+
+/* social row */
+.social{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:1.1rem}
+.social a{display:flex;flex-direction:column;align-items:center;gap:.35rem;text-decoration:none;border-radius:16px;padding:.8rem .5rem;font-size:.72rem;font-weight:600;letter-spacing:.06em;background:var(--bg-2);border:1px solid rgba(255,255,255,.08);transition:transform .2s}
+.social a:hover{transform:translateY(-3px)}
+.social svg{width:26px;height:26px;fill:currentColor}
+.social .wa{color:var(--wa)}.social .ig{color:var(--ig)}.social .zo{color:var(--zo)}
+
+/* sections */
+.sec{padding-block:1.6rem .4rem}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem;margin-bottom:.8rem}
+.sec-head h2{font-size:1.35rem}
+.sec-head span{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.board{background:var(--card);color:var(--ink);border-radius:20px;padding:.8rem;display:grid;gap:.7rem}
+.board .top{display:flex;gap:.8rem;align-items:center}
+.board .top img{width:84px;height:84px;object-fit:cover;border-radius:14px;flex:none}
+.board .top h3{font-size:1.15rem;color:var(--ink)}
+.board .top p{font-size:.8rem;color:#6F5B4F}
+.board .top .from{font-family:var(--font-display);font-weight:700;color:var(--wine);font-size:1rem;margin-top:.15rem}
+.flist{display:grid;gap:.35rem}
+.frow{display:flex;align-items:center;gap:.6rem;background:#fff;border-radius:12px;padding:.5rem .6rem;font-size:.92rem}
+.frow i{width:12px;height:12px;border-radius:50%;flex:none;border:1px solid rgba(0,0,0,.15)}
+.frow b{flex:1;font-weight:500;min-width:0}
+.frow .pr{font-family:var(--font-display);font-weight:700;color:var(--ink)}
+.frow .go{border:0;background:var(--ink);color:#fff;border-radius:999px;width:2rem;height:2rem;display:grid;place-items:center;font-size:1.1rem;font-family:var(--font-display);flex:none}
+.frow .go:hover{background:var(--wine)}
+.frow .go.in{background:#1A9A4B}
+.singles{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.card{background:var(--card);color:var(--ink);border-radius:18px;padding:.55rem;display:flex;flex-direction:column;gap:.4rem;min-width:0}
+.card .art{aspect-ratio:1;max-width:100%;border-radius:13px;overflow:hidden;position:relative;background:var(--card-2)}
+.card .art img{width:100%;height:100%;object-fit:cover;display:block}
+.card .bd{position:absolute;top:.45rem;left:.45rem;background:var(--wine);color:#fff;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;padding:.2rem .45rem;border-radius:999px}
+.card h3{font-size:.98rem;color:var(--ink);padding:0 .2rem}
+.card .fl{font-size:.7rem;color:#7A675A;padding:0 .2rem}
+.card .ft{display:flex;align-items:center;justify-content:space-between;padding:.2rem .2rem 0;margin-top:auto}
+.card .pr{font-family:var(--font-display);font-weight:700;font-size:1.1rem}
+.card .go{border:0;background:var(--ink);color:#fff;border-radius:999px;width:2.1rem;height:2.1rem;display:grid;place-items:center;font-size:1.2rem;font-family:var(--font-display)}
+.card .go.in{background:#1A9A4B}
+.note{margin-top:1.4rem;background:var(--bg-2);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:.9rem 1rem;font-size:.86rem;color:var(--muted)}
+.note b{color:var(--fg);font-weight:600}
+.hours{display:grid;grid-template-columns:auto 1fr;gap:.15rem 1rem;margin-top:.5rem}
+.foot{text-align:center;font-size:.72rem;color:var(--muted);padding-block:1.6rem calc(6.6rem + env(safe-area-inset-bottom,0px))}
+
+/* sticky order bar */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:.6rem max(16px,env(safe-area-inset-right,0px)) calc(.6rem + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:linear-gradient(180deg,rgba(28,20,17,0),rgba(28,20,17,.95) 30%)}
+.bar .in{max-width:560px;margin:0 auto;display:flex;gap:.5rem;align-items:center}
+.bar .sum{flex:1;background:var(--card);color:var(--ink);border-radius:999px;padding:.55rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem;font-size:.85rem;min-width:0}
+.bar .sum b{font-family:var(--font-display);font-weight:700;font-size:1rem;color:var(--wine);white-space:nowrap}
+.bar .sum span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar a.order{background:var(--wa);color:#07301A;border-radius:999px;padding:.75rem 1.1rem;font-family:var(--font-display);font-weight:700;font-size:.9rem;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;white-space:nowrap}
+.bar a.order svg{width:18px;height:18px;fill:currentColor}
+.bar .clear{border:0;background:transparent;color:var(--muted);font-size:1.2rem;padding:.2rem .4rem}
+.dsheet{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.6);display:grid;align-items:end}
+.dsheet .panel{background:var(--card);color:var(--ink);border-radius:24px 24px 0 0;padding:1.2rem max(16px,env(safe-area-inset-right,0px)) calc(1.2rem + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));max-width:560px;width:100%;margin:0 auto;display:grid;gap:.7rem;animation:up .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.dsheet h3{font-size:1.3rem;color:var(--ink);display:flex;justify-content:space-between;align-items:center}
+.dsheet h3 button{border:0;background:transparent;font-size:1.3rem;color:#8A7363}
+.dsheet label{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#6F5B4F;font-weight:700;display:block;margin-bottom:.25rem}
+.dsheet input,.dsheet textarea{font:inherit;color:var(--ink);background:#fff;border:1.5px solid #E8DCC6;border-radius:12px;padding:.7rem .85rem;width:100%}
+.dsheet input:focus,.dsheet textarea:focus{border-color:var(--ink);outline:none}
+.dsheet textarea{min-height:4.2rem;resize:vertical}
+.dsheet .err{color:#B04A3A;font-size:.85rem;font-weight:600}
+.dsheet .hint{font-size:.78rem;color:#8A7363}
+.obox{background:var(--card);color:var(--ink);border-radius:20px;padding:1rem;margin-top:1.4rem;display:grid;gap:.6rem}
+.obox h2{font-size:1.25rem;color:var(--ink);display:flex;justify-content:space-between;align-items:baseline}
+.obox h2 span{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--wine);font-weight:700}
+.oline{display:flex;align-items:center;gap:.5rem;background:#fff;border-radius:12px;padding:.45rem .55rem;font-size:.9rem}
+.oline .t{flex:1;min-width:0}.oline .t b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.oline .t span{font-size:.76rem;color:#8A7363}
+.oline .q{display:inline-flex;align-items:center;border:1.5px solid #E2D4BD;border-radius:999px;background:#fff}
+.oline .q button{border:0;background:transparent;width:1.7rem;height:1.7rem;font-size:1rem;color:var(--ink);font-family:var(--font-display)}
+.oline .q output{min-width:1.4rem;text-align:center;font-weight:600;font-size:.85rem}
+.oline .rm{border:0;background:transparent;color:#B04A3A;font-size:1.1rem;padding:0 .2rem}
+.ototal{display:flex;justify-content:space-between;border-top:1.5px dashed #E2D4BD;padding-top:.5rem;font-weight:600}.ototal b{font-family:var(--font-display);font-size:1.25rem;color:var(--wine)}
+.oinfo{background:#fff;border-radius:12px;padding:.6rem .7rem;font-size:.86rem;display:grid;gap:.15rem}
+.oinfo .ok{color:#1A9A4B;font-weight:600}.oinfo .todo{color:#B04A3A;font-weight:600}
+.obox .btn{background:var(--ink);color:#fff;border:0;border-radius:999px;padding:.8rem 1rem;font-family:var(--font-display);font-weight:700;font-size:.95rem}
+.prev{background:#fff;border:1.5px solid #E8DCC6;border-radius:12px;padding:.7rem .8rem;font-size:.8rem;white-space:pre-wrap;color:#4A3A30;max-height:11rem;overflow:auto;font-family:var(--font-body)}
+.dsheet .panel{max-height:92vh;overflow:auto}
+.toast{position:fixed;left:50%;bottom:calc(5.4rem + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--gold);color:var(--ink);padding:.5rem 1rem;font-size:.78rem;font-weight:700;z-index:30;border-radius:999px;font-family:var(--font-display);max-width:calc(100% - 32px)}
+</style>
+
+<div class="splash" id="splash" aria-hidden="true">
+  <div class="ring"></div>
+  <div class="crumbs"><i></i><i></i><i></i><i></i><i></i></div>
+  <div style="display:flex;flex-direction:column;align-items:center">
+    <img class="emb" src="assets/img/logo-emblem.jpg" alt="">
+    <div class="name"><span>CRUMO HOUSE</span></div>
+    <div class="tag">Your Daily Dose of Decadence</div>
+  </div>
+  <button class="skip" type="button" id="skip">Tap to skip</button>
+</div>
+
+<div class="page">
+  <header class="head">
+    <div class="bg"><img src="assets/img/hero-mobile.jpg" alt=""></div>
+    <div class="wrap">
+      <img class="emb" src="assets/img/logo-emblem.jpg" alt="Crumo House emblem">
+      <h1>CRUMO HOUSE</h1>
+      <p class="tag">Your Daily Dose of Decadence</p>
+      <div class="badges"><span class="badge"><strong>Homemade</strong></span><span class="badge"><strong>Hygienic</strong></span><span class="badge">Baked fresh daily</span></div>
+      <div class="live" id="live"><i></i><span id="liveText">Kitchen open</span></div>
+      <div class="social">
+        <a class="wa" id="waTop" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 12 12 0 0 0 4.6 4c1.7.7 2.1.6 2.8.5a2.4 2.4 0 0 0 1.6-1.1 2 2 0 0 0 .1-1.1c0-.1-.2-.2-.5-.3z"/></svg>WhatsApp</a>
+        <a class="ig" id="igLink" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1 0-1.7.2-2.1.4-.5.2-.9.4-1.2.8-.4.4-.6.7-.8 1.2-.2.4-.3 1-.4 2.1C2.7 9.8 2.7 10.1 2.7 12s0 3.5.1 4.7c0 1.1.2 1.7.4 2.1.2.5.4.9.8 1.2.4.4.7.6 1.2.8.4.2 1 .3 2.1.4 1.2.1 1.5.1 4.7.1s3.5 0 4.7-.1c1.1 0 1.7-.2 2.1-.4.5-.2.9-.4 1.2-.8.4-.4.6-.7.8-1.2.2-.4.3-1 .4-2.1.1-1.2.1-1.5.1-4.7s0-3.5-.1-4.7c0-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.8-1.2-.4-.4-.7-.6-1.2-.8-.4-.2-1-.3-2.1-.4C15.5 4 15.1 4 12 4zm0 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm5.2-3.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg>Instagram</a>
+        <a class="zo" id="zoLink" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Zomato</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="sec">
+      <div class="sec-head"><h2>Signature Cookie Tin</h2><span>Large · serves 5</span></div>
+      <div class="board">
+        <div class="top"><img src="assets/img/tin-signature.jpg" alt=""><div><h3>One whole cookie, baked in a gold tin</h3><p>Molten centre. Pick a flavour, tap + to add.</p><div class="from">from ₹699</div></div></div>
+        <div class="flist" id="tinList"></div>
+      </div>
+    </section>
+    <section class="sec">
+      <div class="sec-head"><h2>Signature Petite Tin</h2><span>Small · serves 2</span></div>
+      <div class="board">
+        <div class="top"><img src="assets/img/tin-petite.jpg" alt=""><div><h3>The same molten cookie, sized for two</h3><p>Great for dessert boxes and favours.</p><div class="from">from ₹299</div></div></div>
+        <div class="flist" id="petiteList"></div>
+      </div>
+    </section>
+    <section class="sec">
+      <div class="sec-head"><h2>Single Cookies</h2><span>120 g each</span></div>
+      <div class="singles" id="singles"></div>
+    </section>
+    <section class="obox" id="obox" hidden>
+      <h2>Your order <span id="oboxCount"></span></h2>
+      <div id="olist"></div>
+      <div class="ototal"><span>Total</span><b class="num" id="oboxTotal">₹0</b></div>
+      <div class="oinfo" id="oinfo"></div>
+      <button type="button" class="btn" id="oboxBtn">Add details & order on WhatsApp</button>
+    </section>
+    <div class="note"><b>Custom boxes, gifting &amp; bulk orders</b> — message us on WhatsApp with the occasion and count; we'll quote within the hour. Everything is <strong>homemade</strong> to order in a <strong>hygienic</strong> kitchen.
+      <div class="hours"><b>Mon – Sun</b><span>10 am – 1 am</span><b>Orders</b><span>Accepted 12 pm – 1 am · pre-order from 10 am</span><b>Delivery</b><span>Same-day across Mumbai</span></div>
+    </div>
+    <p class="foot">© Crumo House · Mumbai · Prices as on Zomato · Menu updates automatically, the QR never changes.</p>
+  </main>
+</div>
+
+<div class="bar">
+  <div class="in">
+    <div class="sum" id="sum"><span id="sumText">Nothing picked yet</span><b class="num" id="sumTotal">₹0</b></div>
+    <button class="clear" id="clear" type="button" aria-label="Clear selection" hidden>×</button>
+    <a class="order" id="orderBtn" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 12 12 0 0 0 4.6 4c1.7.7 2.1.6 2.8.5a2.4 2.4 0 0 0 1.6-1.1 2 2 0 0 0 .1-1.1c0-.1-.2-.2-.5-.3z"/></svg>Order</a>
+  </div>
+</div>
+<div class="dsheet" id="dsheet" hidden>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="dsTitle">
+    <h3 id="dsTitle">Your order <button type="button" id="dsClose" aria-label="Close">×</button></h3>
+    <div id="slist" style="display:grid;gap:.35rem"></div>
+    <div class="ototal"><span>Total</span><b class="num" id="sTotal">₹0</b></div>
+    <h3 style="font-size:1.05rem;margin-top:.3rem">Your delivery details</h3>
+    <div><label for="mName">Name</label><input id="mName" autocomplete="name" placeholder="Rahul Mehta"></div>
+    <div><label for="mPhone">WhatsApp / phone number</label><input id="mPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="98XXX XXXXX"></div>
+    <div><label for="mAddr">Delivery address</label><textarea id="mAddr" placeholder="Flat, building, area, pincode"></textarea></div>
+    <div><label for="mTime">Preferred delivery time (optional)</label><input id="mTime" placeholder="e.g. today 8 pm, or tomorrow 1 pm"></div>
+    <p class="err" id="dsErr" hidden></p>
+    <label style="margin-top:.2rem">Message that will be sent</label>
+    <div class="prev" id="mPreview"></div>
+    <a id="dsSend" href="#" target="_blank" rel="noopener" style="background:var(--wa);color:#07301A;border-radius:999px;padding:.85rem 1.1rem;font-family:var(--font-display);font-weight:700;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:.4rem">Send order on WhatsApp</a>
+    <p class="hint">Opens WhatsApp with your items, number and address filled in. Pay on delivery (cash / UPI).</p>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script src="js/config.js"></script>
+<script>
+(function(){
+  var C=window.CRUMO_CONFIG,M=window.CRUMO_MENU,WA=C.whatsapp;
+  var $=function(s){return document.querySelector(s);};
+  var rupee=function(n){return '₹'+n.toLocaleString('en-IN');};
+  var toastT;function toast(m){var t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(function(){t.hidden=true;},1500);}
+  /* splash */
+  var sp=$('#splash');function endSplash(){sp.classList.add('done');document.querySelector('.page').style.animation='none';}
+  $('#skip').addEventListener('click',endSplash);sp.addEventListener('animationend',function(e){if(e.animationName==='splashOut')endSplash();});
+  setTimeout(endSplash,4200);
+  /* links */
+  $('#waTop').href='https://wa.me/'+WA+'?text='+encodeURIComponent(C.greeting);$('#igLink').href=C.instagram;$('#zoLink').href=C.zomato;
+  var d=new Date(),h=d.getHours(),day=d.getDay(),hh=(C.hours.close>24&&h<C.hours.close-24)?h+24:h,open=C.hours.closedDays.indexOf(day)<0&&hh>=C.hours.open&&hh<C.hours.close,early=open&&hh<C.hours.deliverFrom;
+  if(!open)$('#live').classList.add('off');$('#liveText').textContent=open?(early?C.hours.earlyLabel:C.hours.openLabel):(C.hours.closedDays.indexOf(day)>=0?C.hours.closedLabel:C.hours.preorderLabel);
+  /* picks (cart) */
+  var picks=[];
+  function add(key,name,detail,price){var l=picks.filter(function(x){return x.key===key;})[0];if(l)l.qty++;else picks.push({key:key,name:name,detail:detail,price:price,qty:1});toast('Added to cart: '+name+' · '+detail.split(' · ')[0]);update();}
+  function row(f,prefix,name){var r=document.createElement('div');r.className='frow';r.innerHTML='<i style="background:'+f[2]+'"></i><b>'+f[0]+'</b><span class="pr num">'+rupee(f[1])+'</span><button type="button" class="go" aria-label="Add '+f[0]+'">+</button>';r.querySelector('.go').addEventListener('click',function(){add(prefix+'|'+f[0],name,f[0],f[1]);});r.querySelector('.go').dataset.key=prefix+'|'+f[0];return r;}
+  M.tins.forEach(function(f){$('#tinList').appendChild(row(f,'tin','Signature Cookie Tin'));});
+  M.petites.forEach(function(f){$('#petiteList').appendChild(row(f,'petite','Signature Petite Tin'));});
+  M.singles.forEach(function(s){var c=document.createElement('article');c.className='card';c.innerHTML='<div class="art">'+(s.badge?'<span class="bd">'+s.badge+'</span>':'')+'<img src="'+s.img+'" alt="'+s.name+'"></div><h3>'+s.name+'</h3><span class="fl">'+s.fl+'</span><div class="ft"><span class="pr num">'+rupee(s.price)+'</span><button type="button" class="go" data-key="single|'+s.fl+'" aria-label="Add '+s.name+'">+</button></div>';c.querySelector('.go').addEventListener('click',function(){add('single|'+s.fl,s.name,s.fl,s.price);});$('#singles').appendChild(c);});
+  function v(id){return ($(id).value||'').trim();}
+  function total(){var t=0;picks.forEach(function(l){t+=l.price*l.qty;});return t;}
+  function count(){var n=0;picks.forEach(function(l){n+=l.qty;});return n;}
+  function detailsOk(){return v('#mName')&&v('#mPhone').replace(/\D/g,'').length>=10&&v('#mAddr');}
+  function msg(){var L=['🍪 *CRUMO HOUSE — NEW ORDER*','──────────────'];
+    picks.forEach(function(l,i){L.push((i+1)+'. '+l.qty+' × '+l.name+' – '+l.detail+'  —  '+rupee(l.price*l.qty));});
+    L.push('──────────────','*Total: '+rupee(total())+'* ('+count()+' item'+(count()>1?'s':'')+')','');
+    L.push('👤 Name: '+(v('#mName')||'—'),'📞 Phone: '+(v('#mPhone')||'—'),'📍 Address: '+(v('#mAddr')||'—'));
+    if(v('#mTime'))L.push('🕒 Preferred time: '+v('#mTime'));
+    L.push('','Payment: cash / UPI on delivery','Ordered via Crumo House QR menu');return L.join('\n');}
+  function line(l){var el=document.createElement('div');el.className='oline';el.innerHTML='<div class="t"><b>'+l.name+'</b><span>'+l.detail+' · '+rupee(l.price)+' × '+l.qty+' = '+rupee(l.price*l.qty)+'</span></div><div class="q"><button type="button" aria-label="Fewer">−</button><output class="num">'+l.qty+'</output><button type="button" aria-label="More">+</button></div><button type="button" class="rm" aria-label="Remove">×</button>';
+    var bs=el.querySelectorAll('.q button');bs[0].addEventListener('click',function(){l.qty--;if(l.qty<=0)picks=picks.filter(function(x){return x!==l;});update();});bs[1].addEventListener('click',function(){l.qty++;update();});el.querySelector('.rm').addEventListener('click',function(){picks=picks.filter(function(x){return x!==l;});update();});return el;}
+  function update(){var t=total(),n=count();
+    $('#sumTotal').textContent=rupee(t);$('#sumText').textContent=n?n+' item'+(n>1?'s':'')+' in cart'+(detailsOk()?' · details added':''):'Nothing picked yet';$('#clear').hidden=!n;
+    $('#obox').hidden=!n;$('#oboxCount').textContent=n+' item'+(n>1?'s':'');$('#oboxTotal').textContent=rupee(t);
+    var ol=$('#olist');ol.innerHTML='';var sl=$('#slist');sl.innerHTML='';picks.forEach(function(l){ol.appendChild(line(l));sl.appendChild(line(l));});$('#sTotal').textContent=rupee(t);
+    var info=$('#oinfo');info.innerHTML=detailsOk()?'<span class="ok">✓ Details added</span><span>'+v('#mName')+' · '+v('#mPhone')+'</span><span>'+v('#mAddr')+(v('#mTime')?' · '+v('#mTime'):'')+'</span>':'<span class="todo">Details not added yet</span><span>Name, phone and address are needed to place the order.</span>';
+    $('#oboxBtn').textContent=detailsOk()?'Order on WhatsApp →':'Add details & order on WhatsApp';
+    $('#orderBtn').href='https://wa.me/'+WA+'?text='+encodeURIComponent(n&&detailsOk()?msg():C.greeting);
+    $('#mPreview').textContent=n?msg():'(add items first)';$('#dsSend').href='https://wa.me/'+WA+'?text='+encodeURIComponent(msg());
+    document.querySelectorAll('.go[data-key]').forEach(function(b){var l=picks.filter(function(x){return x.key===b.dataset.key;})[0];b.classList.toggle('in',!!l);b.textContent=l?l.qty:'+';});}
+  function validate(){var e=$('#dsErr');e.hidden=true;if(!picks.length){e.textContent='Add at least one item first.';e.hidden=false;return false;}if(!v('#mName')){e.textContent='Please add your name.';e.hidden=false;return false;}if(v('#mPhone').replace(/\D/g,'').length<10){e.textContent='Please enter a 10-digit phone number so we can confirm the order.';e.hidden=false;return false;}if(!v('#mAddr')){e.textContent='Please add the delivery address.';e.hidden=false;return false;}return true;}
+  function openSheet(){if(!picks.length){toast('Add something to your cart first');return;}update();$('#dsheet').hidden=false;setTimeout(function(){if(!v('#mName'))$('#mName').focus();},50);}
+  ['#mName','#mPhone','#mAddr','#mTime'].forEach(function(id){$(id).addEventListener('input',function(){$('#dsErr').hidden=true;update();});});
+  $('#orderBtn').addEventListener('click',function(e){if(!picks.length)return;e.preventDefault();openSheet();});
+  $('#oboxBtn').addEventListener('click',openSheet);
+  $('#dsClose').addEventListener('click',function(){$('#dsheet').hidden=true;});
+  $('#dsheet').addEventListener('click',function(e){if(e.target===$('#dsheet'))$('#dsheet').hidden=true;});
+  $('#dsSend').addEventListener('click',function(e){if(!validate()){e.preventDefault();return;}update();toast('Opening WhatsApp with your order');$('#dsheet').hidden=true;});
+  $('#clear').addEventListener('click',function(){picks=[];update();});
+  update();
+})();
+</script>
+</body>
+</html>
